@@ -104,7 +104,6 @@ class ObCollisionAvoidanceEnv(gym.Env):
             self.observation[agent] = {}
         # Miaorn
         self.neighbor_data = []
-        self.neighbor_Mat = setMat()
 
         # The observation returned by the environment is a Dict of Boxes, keyed by agent index.
         self.observation_space = gym.spaces.Dict({})
@@ -130,6 +129,9 @@ class ObCollisionAvoidanceEnv(gym.Env):
         self.plot_policy_name = None
 
         self.perturbed_obs = None
+
+
+        self.adjMatrix = Config.adj_matrix['test1']
 
     def step(self, actions, dt=None):
         """ Run one timestep of environment dynamics.
@@ -462,8 +464,6 @@ class ObCollisionAvoidanceEnv(gym.Env):
 
         return self.observation
 
-    def setMat(self):
-        pass
 
     def get_neighbor(self, id):
         """
@@ -482,13 +482,13 @@ class ObCollisionAvoidanceEnv(gym.Env):
         #         self.observation[i] = agent.get_observation_dict(self.agents)
 
         for i, agent in enumerate(self.agents):
-            if self.neighbor_Mat[id][i] == 1:
+            if self.adjMatrix[id][i] == 1:
                 # self.observation[i] = agent.get_observation_dict(self.agents)
                 self.neighbor_data.append(agent.get_observation_dict())
             else:
                 self.neighbor_data.append(None)
-
         return self.neighbor_data
+
 
     def _initialize_rewards(self):
         """ Set some class attributes regarding reward values based on Config """
