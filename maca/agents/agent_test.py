@@ -30,6 +30,7 @@ class DistributedAgent(BaseAgent):
     def __init__(self, start_x, start_y, goal_x, goal_y,  radius,
                  pref_speed, initial_heading, policy, dynamics_model, sensors, id):
 
+        self.neighbor_info = {1: [0, 0], }
         self.policy = policy()
         self.sensors = [sensor() for sensor in sensors]
         self.dynamics_model = dynamics_model(self)

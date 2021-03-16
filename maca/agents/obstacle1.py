@@ -33,10 +33,8 @@ class Obstacle(BaseAgent):
 
         # self.neighbor_ids = np.array(neighbor_ids)
         # self.neighbor_pos = np.array(neighbor_pos)
-        # self.neighbor_info = neighbor_info
-        self.neighbor_ids = np.array([0,0])
-        self.neighbor_pos = np.array([[0, 0], [0, 0]])
-        self.neighbor_info = {0: [0, 0], 0: [0, 0]}
+        self.neighbor_info = {0: [0,0]}
+
 
         # self.neighbor_ids = None
         # self.neighbor_pos = None

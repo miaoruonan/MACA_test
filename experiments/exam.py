@@ -51,7 +51,7 @@ def get_neighbor(agent_self, neighbor, agents):
             neighbor_data.append(agents[i])
     return neighbor_data
 
-def build_agents(sx, sy, gx, gy, ):
+def build_agents():
     s_x = -2
     s_y = -2
     # StartList = [[s_x, s_y+1],

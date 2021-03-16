@@ -28,12 +28,11 @@ class DistributedAgent(BaseAgent):
 
     """
     def __init__(self, start_x, start_y, goal_x, goal_y, neighbor_info, neighbor_ids, neighbor_pos, radius,
-                 pref_speed, initial_heading, policy, dynamics_model, sensors, id, neighbor):
+                 pref_speed, initial_heading, policy, dynamics_model, sensors, id):
 
         self.neighbor_ids = np.array(neighbor_ids)
         self.neighbor_pos = np.array(neighbor_pos)
         self.neighbor_info = neighbor_info
-        self.neighbor = np.array(neighbor)
         self.neighbor_data = []
 
         self.policy = policy()
