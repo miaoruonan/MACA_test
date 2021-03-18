@@ -119,7 +119,6 @@ def main():
 
     # Instantiate the environment
     env = gym.make("Formation-v0")
-    # env1 = gym.make("Formation-v0")
 
     # In case you want to save plots, choose the directory
     env.set_plot_save_dir(os.path.dirname(os.path.realpath(__file__)) + '/results/exam/')
@@ -130,10 +129,6 @@ def main():
     [agent.policy.initialize_network() for agent in agents if hasattr(agent.policy, 'initialize_network')]
     env.set_agents(agents)
 
-    # obstacle1 = [obstacle(start_x=1, start_y=1, radius=0.5, neighbor_info={1: [1, 0], 3: [0, -1]},
-    #           neighbor_ids = [1,3], neighbor_pos = [[1, 0], [0, -1]],initial_heading = -np.pi, id = 0, pref_speed = 0.2,
-    #                      policy = policy_dict['Formation'], dynamics_model=FullDynamics, sensors=[OtherAgentsStatesSensor])]
-    # env1.set_agents(obstacle1)
     obs = env.reset() # Get agents' initial observations
     # obs1 = env1.reset()
     # Repeatedly send actions to the environment based on agents' observations

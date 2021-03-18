@@ -11,3 +11,4 @@ from .CARRLPolicy import CARRLPolicy
 from .LearningPolicyGA3C import LearningPolicyGA3C
 
 from .FormationPolicy import FormationPolicy
+from .FormationPolicy_test import FormationPolicy_test

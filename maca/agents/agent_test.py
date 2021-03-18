@@ -27,17 +27,17 @@ class DistributedAgent(BaseAgent):
     :param dt_nominal: (float) time in seconds of each simulation step
 
     """
-    def __init__(self, start_x, start_y, goal_x, goal_y,  radius,
+    def __init__(self, start_x, start_y, goal_x, goal_y,  radius, neighbor_info,
                  pref_speed, initial_heading, policy, dynamics_model, sensors, id):
 
-        self.neighbor_info = {1: [0, 0], }
+        # self.neighbor_info = {1: [0, 0], }
         self.policy = policy()
         self.sensors = [sensor() for sensor in sensors]
         self.dynamics_model = dynamics_model(self)
 
         # Store past selected actions
         self.chosen_action_dict = {}
-
+        self.neighbor_info = neighbor_info
         self.id = id
         self.action_dim = 2
         self.dist_to_goal = 0.0

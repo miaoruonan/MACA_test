@@ -131,7 +131,7 @@ class ObCollisionAvoidanceEnv(gym.Env):
         self.perturbed_obs = None
 
 
-        self.adjMatrix = Config.adj_matrix['test1']
+        self.adjMatrix = Config.adj_matrix1['test1']
 
     def step(self, actions, dt=None):
         """ Run one timestep of environment dynamics.
@@ -482,7 +482,7 @@ class ObCollisionAvoidanceEnv(gym.Env):
         #         self.observation[i] = agent.get_observation_dict(self.agents)
 
         for i, agent in enumerate(self.agents):
-            if self.adjMatrix[id][i] == 1:
+            if self.adjMatrix[id][i] != [0,0]:
                 # self.observation[i] = agent.get_observation_dict(self.agents)
                 self.neighbor_data.append(agent.get_observation_dict())
             else:

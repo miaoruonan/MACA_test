@@ -6,7 +6,7 @@ from maca.envs.util import wrap
 from maca.policies.InternalPolicy import InternalPolicy
 from maca.policies.CADRL.scripts.multi import nn_navigation_value_multi as nn_nav
 
-class FormationPolicy(InternalPolicy):
+class FormationPolicy_test(InternalPolicy):
     """ Re-purposed from: Socially Aware Motion Planning with Deep Reinforcement Learning
 
     Loads a pre-traned SA-CADRL 4-agent network (with no social norm preference LHS/RHS).
@@ -24,6 +24,7 @@ class FormationPolicy(InternalPolicy):
         self.w_p = 3
         self.w_g = 1
 
+
     def find_next_action(self, obs, agents, index):
         """
         Converts environment's agents representation to CADRL format.
@@ -37,16 +38,21 @@ class FormationPolicy(InternalPolicy):
             commanded [heading delta, speed]
         """
         host_agent   = agents[index]
-        neighbor_num = len(host_agent.neighbor_info)
+        # neighbor_num = len(host_agent.neighbor_info)
         neighbor_num = 2
         pos_diff_sum = 0
         vel_diff_sum = 0
-        for idx, pos_diff in host_agent.neighbor_info.items():
-            other_agent = agents[idx]
-            rel_pos_to_other_global_frame = other_agent.pos_global_frame - host_agent.pos_global_frame
-            pos_diff_sum += rel_pos_to_other_global_frame - pos_diff
-            vel_diff_sum += other_agent.vel_global_frame #- host_agent.vel_global_frame
-
+        # for idx, pos_diff in host_agent.neighbor_info.items():
+        #     other_agent = agents[idx]
+        #     rel_pos_to_other_global_frame = other_agent.pos_global_frame - host_agent.pos_global_frame
+        #     pos_diff_sum += rel_pos_to_other_global_frame - pos_diff
+        #     vel_diff_sum += other_agent.vel_global_frame #- host_agent.vel_global_frame
+        for i, data in enumerate(host_agent.neighbor_info):
+            if host_agent.neighbor_info[i] != [0,0]:
+                other_agent = agents[i]
+                rel_pos_to_other_global_frame = other_agent.pos_global_frame - host_agent.pos_global_frame
+                pos_diff_sum += rel_pos_to_other_global_frame - data
+                vel_diff_sum += other_agent.vel_global_frame #- host_agent.vel_global_frame
         vel_consensus = np.array(self.w_p * pos_diff_sum + 1/neighbor_num * vel_diff_sum )
 
         if index == 0:
